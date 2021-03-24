@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,19 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
-  passType: string = 'password';
-  changePasswordType() {
-    if (this.passType == 'password') {
-      this.passType = 'text'
-    } else {
-      this.passType == 'password'
-    }
+  constructor(private router: Router) {
+
   }
 
+  public type = 'password';
+  public showPass = false;
+  showPassword() {
+     this.showPass = !this.showPass;
+     if(this.showPass){
+       this.type = 'text';
+     } else {
+       this.type = 'password';
+     }
+  }
+
+
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
+
+  goToHomePage() {
+    this.router.navigateByUrl('/home');
+  }
   ngOnInit() {
   }
-  showPassword(input: any): any {
-    input.type = input.type === 'password' ? 'text' : 'password';
-  }
+
 }
